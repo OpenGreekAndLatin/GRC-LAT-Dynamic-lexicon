@@ -1,0 +1,229 @@
+/* Pushes Footer to the Bottom*/
+* {
+margin: 0;
+}
+html, body {
+height: 100%;
+}
+.wrapper {
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -4.5em;
+}
+
+.center {
+    text-align: center;
+}
+
+.push {
+	height: 4.5em;
+    clear: both;
+}
+
+/* NON-SPECIFIC */
+
+h1 {
+	display: none;
+}
+
+h3 {
+    margin-top: 10px;
+}
+
+/* Important for Buttons with symbols: */
+.btn i {
+    line-height: inherit;
+}
+
+/* INDEX PAGE*/
+
+
+.foreign{ color:#3333FF;font-weight:700;}
+.etym{color:#FF3333;font-weight:700;}
+.usg{color:#888833;font-weight:700;}
+.lit{font-size:10px;}
+.lit i {color:#666666}
+.subTit{font-size:12px;}
+.POS{color:#FF0000;}
+.CS{color:#008800}
+.NUM{color:#888800}
+.GN{color:#880088}
+.dbdgPOS{background-color:#FF0000}
+#header {
+	margin-top: 5%;
+	background: url("../images/logo_dh_light.png") no-repeat center center;
+	height: 250px;
+
+}
+
+#header.load {
+    opacity: 1;
+}
+
+/* I want my glyphicons to float left */
+.panel-title  .fa, .modal-title .fa {
+    display: inline-block;
+    float: left;
+}
+
+/* remove Padding from button-glyph */
+.buttonglyph{
+    padding: 0;
+}
+
+/* Random Elements */
+.randomgroup {
+    list-style: none;
+    padding: 0px;
+} 
+
+.randomgroup li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.beschreibungindex {
+    min-height: 5em;
+}
+
+.desc_nowrap {
+    white-space: nowrap;
+}
+
+/* FOOTER */
+#footer{
+	background: #F5F5F5;
+	width: 100%;
+	padding-top: 4px;
+	min-height: 4.5em;
+    box-shadow: 0px -1px 1px rgba(0, 0, 0, 0.05);
+    border-top: 1px solid #DDD;
+    text-align: center;
+	
+}
+#footer p {
+	font-size: 12px;
+	color: #FFF;
+	margin-bottom: 1px;
+}
+
+#footerlist{
+    margin-bottom: 5px;
+}
+
+#footerlist li{
+    display: inline-block;
+    margin-right: 5px;
+}
+
+/* RESPAGE */
+
+.navbar-header {
+    min-height: 75px;
+    width: 200px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.navbar-brand-ws {
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.navbar-form {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+.navbar-btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+
+
+
+/* Styling for MODAL in corpus_selection.php */
+#myModal .modal-title{
+    text-align: center;
+}
+#myModal .list-group{
+    text-align: left;
+}
+
+#myModal .list-group-item{
+    display: inline-block;
+    padding: 0px;
+    font-size: 0.8em;
+    border: none;
+    border-radius: 3px;
+}
+
+#myModal .list-group-item a{
+    
+}
+
+
+
+#myModal .list-group-item a:hover{
+    background-color: #428BCA;
+    color: #FFF;    
+    text-decoration: none;
+}
+
+#myModal .pusher {
+    width:100%;
+    height: 0px;
+    margin: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    padding:0;
+    list-style: none;
+    display: block;
+}
+
+#myModal .modal-letter{
+    font-size: 2em;
+    vertical-align: middle;
+    min-width: 30px;
+    padding-left: 6px;
+    display: inline-block;
+}
+
+
+#myModal .btn-modal{
+    border: none;
+    color: #428BCA;
+    padding: 5px 6px;
+    
+}
+
+#myModal .btn-modal-before-dropddown{
+    padding-right: 2px;
+}
+
+#myModal .btn-modal-caret-only{
+    padding-left: 2px;
+}
+
+#myModal .check {
+    display: none;
+    
+    color: #428BCA;
+    
+}
+
+#myModal .li:hover .check {
+    color: #FFF;
+}
+
+
+
+/* Tooltip width */
+div.tooltip-inner {
+    max-width: 350px;
+    width: 100%;
+}
+
+/*End Modal */
