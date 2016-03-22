@@ -7,26 +7,12 @@
     <link href="css/style.css" rel="stylesheet">
 	<link href='http://fonts.googleapis.com/css?family=Roboto+Condensed' rel='stylesheet' type='text/css'>    <!-- FA-Icons -->
 	<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
-	    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	<script type="text/javascript" src="js/DL.js"></script>
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<script language="javascript">
 	      google.load("visualization", "1", {packages:["corechart","wordtree"]});
-	google.setOnLoadCallback(drawCharts);
-	
-	function  drawCharts() {
+		  google.setOnLoadCallback(drawCharts);
 
-		// drawing Greek translation chart
-        var dataGrc = google.visualization.arrayToDataTable([<?=$GreekChart?>]);
-        var optionsGrc = { title: 'Greek Translation of ({{$word}})'};
-        var chartGrc = new google.visualization.PieChart(document.getElementById('GreekChart'));
-        chartGrc.draw(dataGrc, optionsGrc);
-        
-		// drawing Latin translation chart
-        var dataLt = google.visualization.arrayToDataTable([<?=$LatinChart?>]);
-        var optionsLt = { title: 'Latin Translation of ({{$word}})'};
-        var chartLt = new google.visualization.PieChart(document.getElementById('LatinChart'));
-        chartLt.draw(dataLt, optionsLt);
-	}
-	
 	</script>
 	
 	<title>GL Dynamic Lexicon</title>

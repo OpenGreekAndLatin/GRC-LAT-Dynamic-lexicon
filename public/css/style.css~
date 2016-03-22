@@ -38,16 +38,7 @@ h3 {
 
 /* INDEX PAGE*/
 
-.bibl{color:#999;}
-.quote{color:#000;}
-.note{color:#600;}
-.highlighted{cursor: pointer; background-color:#888888; padding:5px; color:#FFF;border: 2px solid;border-radius: 5px;}
-svg { width: 100%; height: 100%; margin:0px;position:relative; bottom:0px; }
-#graph {
-    width:60%;
-    height:400px;
-    margin: auto;
-}
+
 .foreign{ color:#3333FF;font-weight:700;}
 .etym{color:#FF3333;font-weight:700;}
 .usg{color:#888833;font-weight:700;}
