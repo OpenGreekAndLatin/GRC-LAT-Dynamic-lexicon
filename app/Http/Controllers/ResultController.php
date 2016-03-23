@@ -13,11 +13,36 @@ class ResultController extends Controller
 	{
 		$in=Input::all();
 		//print_r($in);
-		$in['LatinChart']=$this::LatinChart($in['word']);
-		$in['GreekChart']=$this::GreekChart($in['word']);
-		$in['LatinExamples']=$this::get_example($in['word'],"en","WN_sentences_lat");
-		$in['GreekExamples']=$this::get_example($in['word'],"en","WN_sentences_grc");
+		if($in['language']=="en" || $in['language']=="")
+		{
+			$in['FirstChart']=$this::GreekChart($in['word']);
+			$in['SecondChart']=$this::LatinChart($in['word']);
+			$in['LatinExamples']=$this::get_example($in['word'],"en","WN_sentences_lat");
+			$in['GreekExamples']=$this::get_example($in['word'],"en","WN_sentences_grc");
+		}else if($in['language']=="grc") {
+			$in['FirstChart']=$this::getTranslation($in['word'],'WN_grc_stat_mod');
+			$in['SecondChart']="";//$this::LatinChart($in['word']);
+			$in['Examples']=$this::get_example($in['word'],"gr","WN_sentences_grc");
+		}else{
+			$in['FirstChart']=$this::getTranslation($in['word'],'WN_lat_stat_mod');
+			$in['SecondChart']="";//$this::GreekChart($in['word']);
+			$in['Examples']=$this::get_example($in['word'],"gr","WN_sentences_lat");
+		}
 		return view("result",$in);
+	}
+	
+	private function getTranslation($word,$table)
+	{
+	 $q="select * from $table where gr='".$word."' order by freq DESC limit 0,10";
+	 $translations=DB::select($q);
+	 $ENarr[]="['".$word."','Translations']"; 
+	 foreach($translations as $k=>$w)
+	 {
+	   $word=$w->en;
+	   $freq=$w->freq;
+	   $ENarr[]="['".$word."',".$freq."]"; 
+	 }
+	 return implode(",",$ENarr);
 	}
 	
 	public function GreekChart($word)

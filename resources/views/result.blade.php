@@ -12,7 +12,28 @@
 	<script language="javascript">
 	      google.load("visualization", "1", {packages:["corechart","wordtree"]});
 		  google.setOnLoadCallback(drawCharts);
-
+	
+		
+	function  drawCharts() {
+		<? if($language=="en"){ ?>
+		// drawing Greek translation chart
+        var dataGrc = google.visualization.arrayToDataTable([<?=$FirstChart?>]);
+        var optionsGrc = { title: 'Greek Translations of ({{$word}})'};
+        var chartGrc = new google.visualization.PieChart(document.getElementById('FirstChart'));
+        chartGrc.draw(dataGrc, optionsGrc);
+		// drawing Latin translation chart
+        var dataLt = google.visualization.arrayToDataTable([<?=$SecondChart?>]);
+        var optionsLt = { title: 'Latin Translations of ({{$word}})'};
+        var chartLt = new google.visualization.PieChart(document.getElementById('SecondChart'));
+        chartLt.draw(dataLt, optionsLt); 
+        <? }else{ ?>
+        var dataGrc = google.visualization.arrayToDataTable([<?=$FirstChart?>]);
+        var optionsGrc = { title: 'English Translations of (<?=$word?>)'};
+        var chartGrc = new google.visualization.PieChart(document.getElementById('FirstChart'));
+        chartGrc.draw(dataGrc, optionsGrc);
+        <?} ?>
+	}
+	
 	</script>
 	
 	<title>GL Dynamic Lexicon</title>
@@ -65,8 +86,8 @@
       </div>
       <div class="panel-body" id="demo">
       <div style="width:100%;margin-left:2%;margin-right:2%;overflow: hidden;">
-		<div id="GreekChart" class="col-md-6" style="display: inline-block;width: 650px; height:400px">{{$GreekChart}}</div>
-	    <div id="LatinChart" class="col-md-6" style="display: inline-block;width: 650px; height:400px">{{$LatinChart}}</div>
+		<div id="FirstChart" class="col-md-6" style="display: inline-block;width: 650px; height:400px">{{$FirstChart}}</div>
+	    <div id="SecondChart" class="col-md-6" style="display: inline-block;width: 650px; height:400px">{{$SecondChart}}</div>
 	   </div> 
 	</div>
     </div>  
@@ -78,11 +99,15 @@
         <div class="panel-title">Sentence Examples of <font size="6">{{$word}}</font> </div>
       </div>
       <div class="panel-body" >
-      
+      <? if($language=="en" || $language==""){ ?>
       <table style="width:100%;margin-left:2%;margin-right:2%;overflow: hidden;"><tr>
-       	<td valign="top" id="GreekExamples" style="display: inline-block;width: 45%;  margin:10px"><?=$GreekExamples?></td>
-       	<td id="LatinExamples" style="display: inline-block;width: 45%;  margin:10px"><?=$LatinExamples?></td>
-	   </tr></table> 
+       	<td id="GreekExamples" 	class="col-md-6" style="margin:10px"><?=$GreekExamples?></td>
+       	<td id="LatinExamples"  class="col-md-6" style="margin:10px"><?=$LatinExamples?></td>
+	   </tr>
+	  </table> 
+	  <? }else{ ?>
+			<div id="examples"><?=$Examples?></div>	  
+	  <? }?>
 	</div>
     </div>  
 <!-- End The example Box -->
