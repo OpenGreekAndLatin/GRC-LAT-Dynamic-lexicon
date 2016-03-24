@@ -1,6 +1,8 @@
 # DynamicLexicon
 Ancient Greek/ Latin Dynamic Lexicon
 
+![Alt text](https://cloud.githubusercontent.com/assets/16988264/14022037/40e70d40-f1de-11e5-85d0-905eb478c71e.png)
+
 The goal of this Lexicon is to provide training data for a word alignment system and these data will be used to identify the translation relationships among the words in the parallel texts (Greek/Latin) of the bilingual corpus of the Digital Fragmenta Historicorum Graecorum (DFHG). 
 
 
