@@ -87,7 +87,7 @@
       <div class="panel-body" id="demo">
       <div style="width:100%;margin-left:2%;margin-right:2%;overflow: hidden;">
 		<div id="FirstChart" class="col-md-6" style="display: inline-block;width: 650px; height:400px">{{$FirstChart}}</div>
-	    <div id="SecondChart" class="col-md-6" style="display: inline-block;width: 650px; height:400px">{{$SecondChart}}</div>
+	    <div id="SecondChart" class="col-md-6" style="display: inline-block;width: 650px; height:400px"><?=$SecondChart?></div>
 	   </div> 
 	</div>
     </div>  
@@ -101,8 +101,8 @@
       <div class="panel-body" >
       <? if($language=="en" || $language==""){ ?>
       <table style="width:100%;margin-left:2%;margin-right:2%;overflow: hidden;"><tr>
-       	<td id="GreekExamples" 	class="col-md-6" style="margin:10px"><?=$GreekExamples?></td>
-       	<td id="LatinExamples"  class="col-md-6" style="margin:10px"><?=$LatinExamples?></td>
+       	<td id="GreekExamples" valign="top" class="col-md-6" style="margin:10px"><?=$GreekExamples?></td>
+       	<td id="LatinExamples" valign="top"	class="col-md-6" style="margin:10px"><?=$LatinExamples?></td>
 	   </tr>
 	  </table> 
 	  <? }else{ ?>

@@ -20,89 +20,99 @@ class ResultController extends Controller
 			$in['LatinExamples']=$this::get_example($in['word'],"en","WN_sentences_lat");
 			$in['GreekExamples']=$this::get_example($in['word'],"en","WN_sentences_grc");
 		}else if($in['language']=="grc") {
-			$in['FirstChart']=$this::getTranslation($in['word'],'WN_grc_stat_mod');
-			$in['SecondChart']="";//$this::LatinChart($in['word']);
+			$in['FirstChart']=$this::getEnglishTranslation($in['word'],'WN_grc_stat_mod');
+			$in['SecondChart']=$this::getTranslation($in['word'],'greek','latin','Latin Translation of '.$in['word']);
 			$in['Examples']=$this::get_example($in['word'],"gr","WN_sentences_grc");
 		}else{
-			$in['FirstChart']=$this::getTranslation($in['word'],'WN_lat_stat_mod');
-			$in['SecondChart']="";//$this::GreekChart($in['word']);
+			$in['FirstChart']=$this::getEnglishTranslation($in['word'],'WN_lat_stat_mod');
+			$in['SecondChart']=$this::getTranslation($in['word'],'latin','greek','Greek Translation of '.$in['word']);
 			$in['Examples']=$this::get_example($in['word'],"gr","WN_sentences_lat");
 		}
 		return view("result",$in);
 	}
 	
-	private function getTranslation($word,$table)
+	private function getEnglishTranslation($word,$table)
 	{
-	 $q="select * from $table where gr='".$word."' order by freq DESC limit 0,10";
-	 $translations=DB::select($q);
-	 $ENarr[]="['".$word."','Translations']"; 
-	 foreach($translations as $k=>$w)
-	 {
-	   $word=$w->en;
-	   $freq=$w->freq;
-	   $ENarr[]="['".$word."',".$freq."]"; 
-	 }
-	 return implode(",",$ENarr);
+	 try{
+		 $q="select * from $table where gr='".$word."' order by freq DESC limit 0,10";
+		 $translations=DB::select($q);
+		 $ENarr[]="['".$word."','Translations']"; 
+		 foreach($translations as $k=>$w)
+		 {
+		   $word=$w->en;
+		   $freq=$w->freq;
+		   $ENarr[]="['".$word."',".$freq."]"; 
+		 }
+		 return implode(",",$ENarr);
+		 }catch(Exception $e){
+		 return "";
+		 }
 	}
 	
 	public function GreekChart($word)
 	{
-
-	 $in=Input::all();
-	 $q="select * from WN_grc_stat_mod where en='".$word."' order by freq DESC limit 0,10";
-	 $lt=DB::select($q);	 
-	 $ltarr[]="['".$word."','Translations']";   //
-	 $lemmas=array();
-	 foreach($lt as $k=>$w)
-	 {
-	   $word=$w->gr;
-	   $freq=$w->freq;
-	   $lemma=$this::getLemma_grc($word);
-	   if($lemma=="") $lemma[0]=$word;
-	   if(array_key_exists($lemma[0],$lemmas)) 
-	   		$lemmas[$lemma[0]]+=$freq;
-	   	else
-	   		$lemmas[$lemma[0]]=$freq;
+	 try{
+		 $in=Input::all();
+		 $q="select * from WN_grc_stat_mod where en='".$word."' order by freq DESC limit 0,10";
+		 $lt=DB::select($q);	 
+		 $ltarr[]="['".$word."','Translations']";   //
+		 $lemmas=array();
+		 foreach($lt as $k=>$w)
+		 {
+		   $word=$w->gr;
+		   $freq=$w->freq;
+		   $lemma=$this::getLemma_grc($word);
+		   if($lemma=="") $lemma[0]=$word;
+		   if(array_key_exists($lemma[0],$lemmas)) 
+				$lemmas[$lemma[0]]+=$freq;
+			else
+				$lemmas[$lemma[0]]=$freq;
 	   
-	  $tr[$lemma[0]][]=$word;   
-	 }
-	  arsort($lemmas);
+		  $tr[$lemma[0]][]=$word;   
+		 }
+		  arsort($lemmas);
 		
-	 foreach($lemmas as $lem=>$freq)
-	 {
-	  $ltarr[]="[ '".$lem." (".implode(", ",$tr[$lem]).")',".$freq."]";
-	 }
-	 return $ltarr=implode(",",$ltarr);
-
+		 foreach($lemmas as $lem=>$freq)
+		 {
+		  $ltarr[]="[ '".$lem." (".implode(", ",$tr[$lem]).")',".$freq."]";
+		 }
+		 return $ltarr=implode(",",$ltarr);
+	}catch(Exception $e){
+		 return "";
+		 }
 	}  
 	
 	private function LatinChart($word)
-	{ 
-	 $in=Input::all();
-	 $q="select * from WN_lat_stat_mod where en='".$word."' order by freq DESC limit 0,10";
-	 $lt=DB::select($q);	 
-	 $ltarr[]="['".$word."','Translations']";   //
-	 $lemmas=array();
-	 foreach($lt as $k=>$w)
-	 {
-	   $word=$w->gr;
-	   $freq=$w->freq;
-	   $lemma=$this::getLemma_lat($word);
-	   if($lemma=="") $lemma[0]=$word;
-	   if(array_key_exists($lemma[0],$lemmas)) 
-	   		$lemmas[$lemma[0]]+=$freq;
-	   	else
-	   		$lemmas[$lemma[0]]=$freq;
+	{
+	try{ 
+		 $in=Input::all();
+		 $q="select * from WN_lat_stat_mod where en='".$word."' order by freq DESC limit 0,10";
+		 $lt=DB::select($q);	 
+		 $ltarr[]="['".$word."','Translations']";   //
+		 $lemmas=array();
+		 foreach($lt as $k=>$w)
+		 {
+		   $word=$w->gr;
+		   $freq=$w->freq;
+		   $lemma=$this::getLemma_lat($word);
+		   if($lemma=="") $lemma[0]=$word;
+		   if(array_key_exists($lemma[0],$lemmas)) 
+				$lemmas[$lemma[0]]+=$freq;
+			else
+				$lemmas[$lemma[0]]=$freq;
 	   
-	  $tr[$lemma[0]][]=$word;   
-	 }
-	  arsort($lemmas);
+		  $tr[$lemma[0]][]=$word;   
+		 }
+		  arsort($lemmas);
 		
-	 foreach($lemmas as $lem=>$freq)
-	 {
-	  $ltarr[]="[ '".$lem." (".implode(", ",$tr[$lem]).")',".$freq."]";
-	 }
-	 return $ltarr=implode(",",$ltarr);
+		 foreach($lemmas as $lem=>$freq)
+		 {
+		  $ltarr[]="[ '".$lem." (".implode(", ",$tr[$lem]).")',".$freq."]";
+		 }
+		 return $ltarr=implode(",",$ltarr);
+	 }catch(Exception $e){
+		 return "";
+		 }
 	}
 	
 	
@@ -194,6 +204,22 @@ class ResultController extends Controller
 		}
 	
 	}
+	
+	
+	function getTranslation($word,$col1,$col2,$title)
+	{
+	 $q="select * from lexicon_simple where ($col1='".addslashes($word)."') and 
+	 (gr_freq/gr) > 0.1 and (lat_freq/lat) >0.1 and abs(((gr_freq/gr) - (lat_freq/lat))/((gr_freq/gr) + (lat_freq/lat)) ) < 0.6  
+	 order by jaccard DESC limit 0,20";
+	 $result=DB::select($q);
+	 foreach($result as $k=>$w)
+	 {
+	   $word=$w->$col2;
+	   $freq=$w->jaccard;
+	   $ENarr[]="<li>".$word." [".$w->english."] (".$freq.")</li>"; 
+	 }
+	 return "<h2>$title</h2><ul>".implode(" ",$ENarr)."</ul>";	
+	 }
 }
 
 ?>
