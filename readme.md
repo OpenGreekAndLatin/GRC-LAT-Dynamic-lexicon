@@ -10,7 +10,7 @@ The biggest challenge is that large digitized Ancient Greek/Latin lexica are pub
 This documentation investigates a simple and effective method for automatic bilingual lexicon extraction (Ancient Greek/Latin) from the
 available aligned bilingual texts (Ancient Greek/English and Latin/English) produced by the Dynamic Lexicon project of the Perseus Digital Library.
 
-http://tariq-yousef.com/lexica/
+http://www.dynamiclexicon.com/
 
 The starting point of our approach is to provide as much parallel texts as possible  to extract all possible translation candidates. The Perseus Digital Library contains approximately 10.5 million words of Latin source texts, 13.5 million words of Greek, and 44.5 million words of English. The texts are all public-domain materials that have been scanned, OCR’d, and formatted into TEI-compliant XML 4.
 
